@@ -12,7 +12,7 @@ services:
       - "16001:16001"
       - "12000-12009:12000-12009"
     volumes:
-      - /Users/gyuminhwangbo/Downloads/ngrinder/ngrinder-controller:/opt/ngrinder-controller:rw
+      - ~/ngrinder-controller:/opt/ngrinder-controller:rw
     networks:
       - ngrinder
   agent:
