@@ -1,14 +1,31 @@
-controller:
-     build: controller
-     ports:
+version: '3'
+
+services:
+  controller:
+    platform: linux/arm64 # specify the platform
+    image: ghkdqhrbals/ngrinder-controller:latest
+    build:
+      context: controller # dockerfile location
+      dockerfile: Dockerfile # dockerfile name
+    ports:
       - "80:80"
       - "16001:16001"
       - "12000-12009:12000-12009"
-     volumes:
-      - ~/ngrinder-controller:/opt/ngrinder-controller
-agent:
-     build: agent
-     links:
-     - controller
-     volumes:
-     - ~/ngrinder-agent:/opt/ngrinder-agent
+    volumes:
+      - /Users/gyuminhwangbo/Downloads/ngrinder/ngrinder-controller:/opt/ngrinder-controller:rw
+    networks:
+      - ngrinder
+  agent:
+    platform: linux/arm64
+    image: ghkdqhrbals/ngrinder-agent:latest
+    build:
+      context: agent
+      dockerfile: Dockerfile
+    links:
+      - controller
+    networks:
+      - ngrinder
+
+networks:
+  ngrinder:
+    driver: bridge

@@ -1,8 +1,6 @@
-FROM jeanblanchard/java:serverjre-8
-MAINTAINER JunHo Yoon "junoyoon@gmail.com"
+FROM amazoncorretto:11
 
-RUN apk update; apk add curl bash udev
-
+RUN yum install -y bash udev curl wget tar unzip gzip
 
 # Set up environment variables
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8

@@ -1,9 +1,8 @@
-FROM jeanblanchard/java:serverjre-8
-MAINTAINER JunHo Yoon "junoyoon@gmail.com"
+FROM amazoncorretto:11
 
-RUN apk update; apk add curl bash tar
+RUN yum install -y tar unzip gzip bash udev curl # tar 설치 추가
 
-ARG MAVEN_VERSION=3.6.3
+ARG MAVEN_VERSION=3.8.8
 ARG MAVEN_DOWNLOAD_BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
 
 ARG GRADLE_VERSION=6.7.1
@@ -46,6 +45,8 @@ COPY scripts /scripts
 
 # Copy final binary
 COPY binary/*.war ${BASE_DIR}
+
+
 
 # Execution
 CMD ["/scripts/run.sh"]
